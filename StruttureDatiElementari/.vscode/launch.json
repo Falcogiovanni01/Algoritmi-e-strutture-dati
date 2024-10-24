@@ -3,6 +3,20 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Sentinella",
+      "request": "launch",
+      "mainClass": "Sentinella.Sentinella",
+      "projectName": "StruttureDatiElementari_c7282c87"
+    },
+    {
+      "type": "java",
+      "name": "Sentinella",
+      "request": "launch",
+      "mainClass": "DoubleLinkedList.Sentinella",
+      "projectName": "StruttureDatiElementari_c7282c87"
+    },
+    {
+      "type": "java",
       "name": "Main",
       "request": "launch",
       "mainClass": "DoubleLinkedList.Main",

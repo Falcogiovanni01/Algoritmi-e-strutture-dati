@@ -58,6 +58,17 @@ class LinkedList {
             if (old.prev != null) {
                 // Collega il nodo precedente al successivo.
                 old.prev.next = old.next;
+                /**
+                 * ES : 1->2->3
+                 * old.prev.next = old.next;
+                 * 
+                 * supponiamo 2 sia old ,
+                 * sto dicendo che
+                 * old.prev , IL NODO 1.
+                 * sto dicendo che 1.next = old.next,
+                 * 1->3
+                 * TI TROVI ?
+                 */
             } else {
                 // Se old è la testa, aggiorna la testa
                 this.head = old.next;
