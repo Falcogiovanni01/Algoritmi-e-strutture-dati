@@ -1,23 +1,32 @@
 package DoubleLinkedList;
 
 class Node {
-    Node prev; 
-    int elem; 
-    Node next; 
+    Node prev;
+    int elem;
+    Node next;
 
     public Node(int e) {
         elem = e;
-        prev = null; 
-        next = null; 
+        prev = null;
+        next = null;
     }
 }
 
 class LinkedList {
-    private Node head; 
+    private Node head;
 
     // mi ritorna un nodo
     public Node listSearch(int k) {
-        Node x = this.head; 
+        Node x = this.head;
+        // ALTERNATIVA
+        /**
+         * while(x != null && x.head != k){
+         * x= x.next ;
+         * }
+         * return x ;
+         * 
+         */
+
         while (x != null) { // Controlla se x non è null
             if (x.elem == k) { // Se l'elemento corrente è uguale a k
                 return x; // Restituisce il nodo trovato
@@ -29,39 +38,39 @@ class LinkedList {
 
     // INSERIMENTO IN TESTA
     public void ListPrepend(int x) {
-        Node newEntry = new Node(x); 
+        Node newEntry = new Node(x);
         if (this.head != null) {
-            this.head.prev = newEntry; 
-            newEntry.next = this.head; 
+            this.head.prev = newEntry;
+            newEntry.next = this.head;
         }
         // ALLA FINE LA TESTA PUNTA AL NUOVO NODO.
-        this.head = newEntry; 
+        this.head = newEntry;
 
-        System.out.println("\nELEMENTO AGGIUNTO: " + x); 
+        System.out.println("\nELEMENTO AGGIUNTO: " + x);
     }
 
     public void listDelete(int x) {
         // ELIMINO ELEMENTO X,
-        Node old = this.listSearch(x); // è il puntatore al nodo. 
+        Node old = this.listSearch(x); // è il puntatore al nodo.
 
         if (old != null) { // Controlla se il nodo esiste
-            // HO TROVATO L'ELEMENTO, DEVO ELIMINARLO: 
+            // HO TROVATO L'ELEMENTO, DEVO ELIMINARLO:
             if (old.prev != null) {
                 // Collega il nodo precedente al successivo.
-                old.prev.next = old.next; 
+                old.prev.next = old.next;
             } else {
                 // Se old è la testa, aggiorna la testa
-                this.head = old.next; 
+                this.head = old.next;
             }
 
             if (old.next != null) {
                 // Collega il nodo successivo al precedente
-                old.next.prev = old.prev; 
+                old.next.prev = old.prev;
             }
 
             // Pulizia dei riferimenti
-            old.prev = null; 
-            old.next = null; 
+            old.prev = null;
+            old.next = null;
             System.out.println("Elemento " + x + " eliminato.");
         } else {
             System.out.println("Elemento " + x + " non trovato.");
