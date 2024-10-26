@@ -3,6 +3,20 @@
   "configurations": [
     {
       "type": "java",
+      "name": "Alberi",
+      "request": "launch",
+      "mainClass": "AlberiDiRicerca.Alberi",
+      "projectName": "StruttureDatiElementari_c7282c87"
+    },
+    {
+      "type": "java",
+      "name": "Alberi",
+      "request": "launch",
+      "mainClass": "Alberi",
+      "projectName": "StruttureDatiElementari_c7282c87"
+    },
+    {
+      "type": "java",
       "name": "Sentinella",
       "request": "launch",
       "mainClass": "Sentinella.Sentinella",
