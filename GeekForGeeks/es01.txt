@@ -1,0 +1,54 @@
+import java.util.ArrayList;
+import java.util.List;
+//
+Dato un numero intero, K. Genera tutte le stringhe binarie di dimensione k senza 1 consecutivi.
+
+Esempi: 
+
+Ingresso: K = 3   
+Uscita: 000, 001, 010, 100, 101 
+Ingresso: K = 4 
+Uscita: 0000 0001 0010 0100 0101 1000 1001 1010
+
+
+
+
+public class BinaryStrings {
+    
+    // Metodo principale per generare tutte le stringhe binarie
+    public static List<String> generateBinaryStrings(int k) {
+        List<String> result = new ArrayList<>();
+        backtrack(result, "", k, 0);
+        return result;
+    }
+
+    // Funzione ricorsiva di backtracking
+    private static void backtrack(List<String> result, String current, int k, int lastBit) {
+        // Se la stringa ha raggiunto la lunghezza desiderata, aggiungila ai risultati
+        if (current.length() == k) {
+            result.add(current);
+            return;
+        }
+        
+        // Aggiungi '0' e continua
+        backtrack(result, current + "0", k, 0);
+        
+        // Aggiungi '1' solo se l'ultimo bit non era '1' (per evitare 1 consecutivi)
+        if (lastBit == 0) {
+            backtrack(result, current + "1", k, 1);
+        }
+    }
+
+    public static void main(String[] args) {
+        int k = 3;
+        System.out.println("Generazione di stringhe binarie di lunghezza " + k + " senza 1 consecutivi:");
+        List<String> result = generateBinaryStrings(k);
+        System.out.println(result);
+
+        // Test con k = 4
+        k = 4;
+        System.out.println("Generazione di stringhe binarie di lunghezza " + k + " senza 1 consecutivi:");
+        result = generateBinaryStrings(k);
+        System.out.println(result);
+    }
+}

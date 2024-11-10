@@ -1,0 +1,78 @@
+public class MazeSolver {
+
+    // Funzione principale che risolve il labirinto
+    public static int[][] solveMaze(int[][] L, int N) {
+        // Inizializza la matrice soluzione S con zeri
+        int[][] S = new int[N][N];
+        
+        // Avvia il backtracking dalla posizione di partenza (0, 0)
+        if (backtrack(L, S, 0, 0, N)) {
+            return S;  // Se è stato trovato un percorso, ritorna la matrice soluzione
+        } else {
+            // Se non c'è soluzione, restituisci una matrice vuota
+            System.out.println("No path found");
+            return new int[0][0];  // Matrice vuota
+        }
+    }
+
+    // Funzione di backtracking per trovare il percorso
+    public static boolean backtrack(int[][] L, int[][] S, int avanti, int basso, int N) {
+        // Caso base: se si è arrivati alla destinazione
+        if (avanti == N - 1 && basso == N - 1) {
+            S[basso][avanti] = 1;
+            return true;
+        }
+
+        // Se il blocco corrente è utilizzabile
+        if (isSafe(L, avanti, basso, N)) {
+            S[basso][avanti] = 1;  // Segna il blocco come parte del percorso
+
+            // Prova a muoversi a destra
+            if (backtrack(L, S, avanti + 1, basso, N)) {
+                return true;
+            }
+
+            // Prova a muoversi in basso
+            if (backtrack(L, S, avanti, basso + 1, N)) {
+                return true;
+            }
+
+            // Backtracking: annulla la cella se non porta alla soluzione
+            S[basso][avanti] = 0;
+            return false;
+        }
+
+        return false;
+    }
+
+    // Funzione di sicurezza per controllare che un blocco sia accessibile
+    public static boolean isSafe(int[][] L, int avanti, int basso, int N) {
+        return (0 <= avanti && avanti < N) && (0 <= basso && basso < N) && (L[basso][avanti] == 1);
+    }
+
+    // Funzione principale per testare l'algoritmo
+    public static void main(String[] args) {
+        // Esempio di labirinto (1 è percorribile, 0 è un vicolo cieco)
+        int[][] labirinto = {
+            {1, 0, 0, 0},
+            {1, 1, 0, 1},
+            {0, 1, 0, 0},
+            {1, 1, 1, 1}
+        };
+        
+        int N = 4; // Dimensione del labirinto
+
+        int[][] soluzione = solveMaze(labirinto, N);
+
+        if (soluzione.length > 0) {
+            // Stampa la matrice soluzione
+            System.out.println("Path found:");
+            for (int i = 0; i < N; i++) {
+                for (int j = 0; j < N; j++) {
+                    System.out.print(soluzione[i][j] + " ");
+                }
+                System.out.println();
+            }
+        }
+    }
+}
