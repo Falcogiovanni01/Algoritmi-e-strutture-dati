@@ -1,0 +1,76 @@
+#include <iostream>
+#include <vector>
+#include <cmath>
+
+using namespace std;
+
+// Funzione per controllare se un numero è primo
+bool check(int x) {
+    if (x < 2) return false;
+    if (x == 2) return true;
+    if (x % 2 == 0) return false; // Elimina i numeri pari
+    for (int i = 3; i <= sqrt(x); i += 2) {
+        if (x % i == 0) return false;
+    }
+    return true;
+}
+
+// Funzione per generare numeri primi tra P e S
+vector<int> generaNumeriPrimi(int S, int P) {
+    vector<int> numeriPrimi;
+    for (int i = P + 1; i <= S; i++) {
+        if (check(i)) {
+            numeriPrimi.push_back(i);
+        }
+    }
+    return numeriPrimi;
+}
+
+// Funzione di backtracking per trovare tutte le sequenze
+void backtracking(vector<vector<int>>& output, int S, int N, vector<int>& numeriPrimi, int sommaCorrente, vector<int>& vettore) {
+    // Se la somma corrente supera S, ritorna
+    if (sommaCorrente > S) return;
+
+    // Se la lunghezza della sequenza è N, verifica la somma
+    if (vettore.size() == N) {
+        if (sommaCorrente == S) {
+            output.push_back(vettore);
+        }
+        return;
+    }
+
+    // Esplora le possibili scelte per aggiungere numeri alla sequenza
+    for (int i = 0; i < numeriPrimi.size(); i++) {
+        int numero = numeriPrimi[i];
+        if (sommaCorrente + numero <= S) {
+            vettore.push_back(numero);
+            backtracking(output, S, N, numeriPrimi, sommaCorrente + numero, vettore);
+            vettore.pop_back(); // Rimuove l'ultimo numero per esplorare altre soluzioni
+        }
+    }
+}
+
+int main() {
+    int S = 30; // Somma target
+    int N = 3;  // Numero di elementi nella sequenza
+    int P = 5;  // Numero primo da cui partire
+
+    vector<int> numeriPrimi = generaNumeriPrimi(S, P);
+
+    vector<vector<int>> output;
+    vector<int> vettore;
+
+    // Inizia il backtracking
+    backtracking(output, S, N, numeriPrimi, 0, vettore);
+
+    // Stampa le soluzioni trovate
+    cout << "Sequenze trovate:" << endl;
+    for (const auto& seq : output) {
+        for (int num : seq) {
+            cout << num << " ";
+        }
+        cout << endl;
+    }
+
+    return 0;
+}
