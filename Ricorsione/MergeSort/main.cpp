@@ -41,7 +41,10 @@ void Merge(int vettore[] , int start ,int mid,  int end){
     int A_left [left] ; 
     int A_right [right ] ; 
 
-    // RIMPO LEFT E RIGHT : 
+    // RIMPO LEFT E RIGHT : quindi uso due vettori ausiliari
+    // li riempio solamente e sotto li confronto 
+    // per inserirli nel mio vettore originario già 
+    // ordinati.
     for(int i =0 ; i<left ; i++){
         A_left[i] = vettore[start + i] ; 
 

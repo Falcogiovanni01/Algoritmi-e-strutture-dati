@@ -1,0 +1,47 @@
+ti trovi che se faccio questo è la stessa cosa di questo : 
+1 : using namespace std;
+class Solution {
+  public:
+    void subsetSumsHelper( vector < int > & arr, int n, vector < int > & ans, int sum, vector<vector<int>> output) {
+      if (sum == n) {
+       output.push_BACK(ans)
+        return;
+      }
+      //element is picked
+        for( int i =0 ; i<num.size();i++) 
+        ans.push_back(arr[i])
+        sum+= arr[i]
+       subsetSumsHelper( arr, n, ans, sum);
+       sum-=arr[i]
+       ans.popback()
+  
+    }
+  vector < int > subsetSums(vector < int > arr, int n) {
+    vector < int > ans;
+    subsetSumsHelper(0, arr, n, ans, 0);
+    sort(ans.begin(), ans.end());
+    return ans;
+  }
+};
+
+2 : 
+using namespace std;
+class Solution {
+  public:
+    void subsetSumsHelper(int ind, vector < int > & arr, int n, vector < int > & ans, int sum) {
+      if (ind == n) {
+        ans.push_back(sum);
+        return;
+      }
+      //element is picked
+      subsetSumsHelper(ind + 1, arr, n, ans, sum + arr[ind]);
+      //element is not picked
+      subsetSumsHelper(ind + 1, arr, n, ans, sum);
+    }
+  vector < int > subsetSums(vector < int > arr, int n) {
+    vector < int > ans;
+    subsetSumsHelper(0, arr, n, ans, 0);
+    sort(ans.begin(), ans.end());
+    return ans;
+  }
+};
