@@ -8,7 +8,48 @@ using namespace std;
 - le classi le interpreti come vettori, e dà li fai una matrice di classi. 
 - ora ogni vettore hai una scelta,
  ora scorri sulla matrice dei costi e dà 
- li vai a prelevare gli elementi e man mano li salvi nel dp normale*/
+ li vai a prelevare gli elementi e man mano li salvi nel dp normale
+ 
+ 
+Vediamo nel dettaglio come calcolare la complessità temporale del tuo algoritmo. Il tuo ragionamento è buono, ma possiamo essere più precisi analizzando il comportamento del programma.
+
+1. Struttura del problema
+L'algoritmo esegue due operazioni principali:
+
+Iterazione sui prodotti di una classe (ciclo for): Simula tutte le scelte possibili per ogni classe.
+Chiamata ricorsiva: Per ogni scelta, passa alla classe successiva e aggiorna il budget.
+Quindi, il comportamento complessivo è governato da due fattori:
+
+Budget (B): Va da 0 a B.
+Numero totale di prodotti (dimensione della matrice dei costi): Questo è dato dal numero di classi (C) e dal numero massimo di prodotti per classe (M).
+2. Complessità dell'algoritmo
+Analizziamo il comportamento.
+
+Passo 1: Chiamate ricorsive
+Ogni stato del problema è definito da due parametri:
+
+Il budget residuo (da 0 a B).
+La classe corrente (da 0 a C).
+Quindi, il numero totale di stati possibili è al massimo B * C.
+
+Passo 2: Ciclo for per ogni classe
+Per ogni stato, eseguiamo un ciclo for sui prodotti della classe corrente. Se il numero massimo di prodotti in una classe è M, il ciclo itera al massimo M volte.
+
+ complessità
+Per ciascuno dei B * C stati, il ciclo for itera al massimo M volte. 
+Quindi la complessità complessiva è:
+
+O(B⋅C⋅M)
+Dove:
+
+𝐵
+B è il budget massimo.
+𝐶
+C è il numero di classi.
+𝑀
+M è il numero massimo di prodotti per classe.
+ 
+ */
 // Funzione ricorsiva con memoization
 int solve(vector<vector<int>>& dp, vector<vector<int>>& costi, int budget, int colonna) {
     // Base cases
@@ -37,8 +78,7 @@ int main() {
     vector<int> classe3 = {1, 3, 3, 7};
     vector<int> classe4 = {50, 14, 23, 8};
 
-    vector<vector<int>> costi = {classe1, classe2, classe3, classe4};
-   
+    vector<vector<int>> costi = {classe1, classe2, classe3, classe4};   
 
     int Budget = 100;
 
