@@ -62,10 +62,14 @@ int solve(vector<vector<int>>& dp, vector<vector<int>>& costi, int budget, int c
     int massimo = INT_MIN;
 
     // Itera sui prodotti della classe corrente
-    for (int prezzo : costi[colonna]) {
-        massimo = max(massimo, solve(dp, costi, budget - prezzo, colonna + 1) + prezzo);
+    // for (int prezzo : costi[colonna]) {
+    //     massimo = max(massimo, solve(dp, costi, budget - prezzo, colonna + 1) + prezzo);
+    // }
+    // ITERA SU OGNI ELEMENTO DELLA CLASSE "I-ESIMA CHE HO COLONNA"
+    for (int i = 0; i < costi[colonna].size(); ++i) {
+    int prezzo = costi[colonna][i];
+    massimo = max(massimo, solve(dp, costi, budget - prezzo, colonna + 1) + prezzo);
     }
-
     // Salva il risultato nella tabella dp
     dp[colonna][budget] = massimo;
     return massimo;
