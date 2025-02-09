@@ -42,9 +42,9 @@ int minimumCost(int n, int c, vector<int> &cuts) {
 }
 
 int main() {
-    vector<int> cuts = {3, 5, 1, 4};
+    vector<int> cuts = {4, 5, 7, 8};
     int c = cuts.size();
-    int n = 7;
+    int n = 10;
 
     cout << "The minimum cost incurred is: " << minimumCost(n, c, cuts) << endl;
 

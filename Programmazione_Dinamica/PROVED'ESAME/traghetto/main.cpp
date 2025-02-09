@@ -1,53 +1,39 @@
 #include <iostream>
 #include <vector>
 #include <algorithm>
+#include <climits>
 
 using namespace std;
 
-void solveFerry(int n, int t, vector<int> &arr, int &minTime, int &minTrips) {
-    int m = arr.size();
-    int maxTrips = (m + n - 1) / n;  // Numero massimo possibile di viaggi
-    vector<vector<int>> dp(m + 1, vector<int>(maxTrips + 1, 1e9));
-    vector<vector<int>> trips(m + 1, vector<int>(maxTrips + 1, 1e9));
+void solveFerryProblem(int n, int t, int m, vector<int>& arrivalTimes) {
+    vector<int> dp(m + 1, INT_MAX);
+    vector<int> trips(m + 1, 0);
+    dp[0] = 0;
+    trips[0] = 0;
 
-    dp[0][0] = 0;
-    trips[0][0] = 0;
-
-    for (int i = 1; i <= m; i++) {
-        for (int j = 1; j <= maxTrips; j++) {
-            for (int k = 1; k <= n && i - k >= 0; k++) {
-                int timeNeeded = max(dp[i - k][j - 1] + 2 * t, arr[i - 1] + t);
-
-                if (timeNeeded < dp[i][j]) {
-                    dp[i][j] = timeNeeded;
-                    trips[i][j] = trips[i - k][j - 1] + 1;
-                } else if (timeNeeded == dp[i][j]) {
-                    trips[i][j] = min(trips[i][j], trips[i - k][j - 1] + 1);
-                }
+    for (int i = 1; i <= m; ++i) {
+        for (int j = max(0, i - n); j < i; ++j) {
+        
+            int currentTime = max(dp[j], arrivalTimes[i - 1]) + 2 * t;
+            if (currentTime < dp[i]) {
+                dp[i] = currentTime;
+                trips[i] = trips[j] + 1;
             }
         }
     }
 
-    // Troviamo la soluzione ottimale
-    minTime = 1e9;
-    minTrips = 1e9;
-    for (int j = 1; j <= maxTrips; j++) {
-        if (dp[m][j] < minTime) {
-            minTime = dp[m][j];
-            minTrips = trips[m][j];
-        }
-    }
+    cout << dp[m] - t << " " << trips[m] << endl;
 }
 
 int main() {
-        int n = 2 ; 
-        int t = 10 ; 
-        vector<int> arr = {0,10,20,30,40,50,60,70,80,90}; 
-        // vector<int> arr = {0,10,30,40}; 
    
-        int minTime, numTrips;
-        solveFerry(n, t, arr, minTime, numTrips);
-        cout << minTime << " " << numTrips << endl;
+    int n = 2; 
+    //2 10 3 
+    int t = 10 ; 
+    int m = 10;
+    vector<int> arr = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90};  // Orari di arrivo delle auto
+
+        solveFerryProblem(n, t, m, arr);
     
 
     return 0;
