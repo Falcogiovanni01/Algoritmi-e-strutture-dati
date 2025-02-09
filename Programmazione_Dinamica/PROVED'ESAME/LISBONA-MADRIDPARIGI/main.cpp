@@ -7,7 +7,7 @@ il suggerimento di tua madre sarebbe 'abcd' e il suggerimento di tuo padre sareb
 nel secondo esempio). 
 Il programma legge due sequenze di viaggio e deve fornire il numero massimo di città visitabili in 
 modo da soddisfare al meglio i suggerimenti di entrambi i genitori.  
- */
+*/
 
 #include <bits/stdc++.h>
 using namespace std;

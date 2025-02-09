@@ -33,8 +33,7 @@ int main() {
     int m = 10;
     vector<int> arr = {0, 10, 20, 30, 40, 50, 60, 70, 80, 90};  // Orari di arrivo delle auto
 
-        solveFerryProblem(n, t, m, arr);
-    
+    solveFerryProblem(n, t, m, arr);
 
     return 0;
 }
