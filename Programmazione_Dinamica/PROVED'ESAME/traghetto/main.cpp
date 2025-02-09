@@ -15,13 +15,14 @@ void solveFerryProblem(int n, int t, int m, vector<int>& arrivalTimes) {
         for (int j = max(0, i - n); j < i; ++j) {
         
             int currentTime = max(dp[j], arrivalTimes[i - 1]) + 2 * t;
-            if (currentTime < dp[i]) {
+            // Aggiorno se il tempo corrente è minore
+            if (currentTime < dp[i]) { 
                 dp[i] = currentTime;
                 trips[i] = trips[j] + 1;
             }
         }
     }
-
+    // sottrai l ultimo tempo di ritorno. 
     cout << dp[m] - t << " " << trips[m] << endl;
 }
 

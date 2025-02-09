@@ -51,27 +51,27 @@ M è il numero massimo di prodotti per classe.
  
  */
 // Funzione ricorsiva con memoization
-int solve(vector<vector<int>>& dp, vector<vector<int>>& costi, int budget, int colonna) {
+int solve(vector<vector<int>>& dp, vector<vector<int>>& costi, int budget, int classi) {
     // Base cases
     if (budget < 0) return INT_MIN; // Budget insufficiente (ritorna valore minimo)
-    if (colonna >= costi.size()) return 0; // Tutte le classi sono state considerate
+    if (classi >= costi.size()) return 0; // Tutte le classi sono state considerate
 
     // Controllo se il risultato è già calcolato
-    if (dp[colonna][budget] != -1) return dp[colonna][budget];
+    if (dp[classi][budget] != -1) return dp[classi][budget];
 
     int massimo = INT_MIN;
 
     // Itera sui prodotti della classe corrente
-    // for (int prezzo : costi[colonna]) {
-    //     massimo = max(massimo, solve(dp, costi, budget - prezzo, colonna + 1) + prezzo);
+    // for (int prezzo : costi[classi]) {
+    //     massimo = max(massimo, solve(dp, costi, budget - prezzo, classi + 1) + prezzo);
     // }
-    // ITERA SU OGNI ELEMENTO DELLA CLASSE "I-ESIMA CHE HO COLONNA"
-    for (int i = 0; i < costi[colonna].size(); ++i) {
-    int prezzo = costi[colonna][i];
-    massimo = max(massimo, solve(dp, costi, budget - prezzo, colonna + 1) + prezzo);
+    // ITERA SU OGNI ELEMENTO DELLA CLASSE "I-ESIMA CHE HO classi"
+    for (int i = 0; i < costi[classi].size(); ++i) {
+    int prezzo = costi[classi][i];
+    massimo = max(massimo, solve(dp, costi, budget - prezzo, classi + 1) + prezzo);
     }
     // Salva il risultato nella tabella dp
-    dp[colonna][budget] = massimo;
+    dp[classi][budget] = massimo;
     return massimo;
 }
 
